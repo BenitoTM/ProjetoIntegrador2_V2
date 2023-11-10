@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <title>Gerador de Cartão</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0; /* Fundo cinza claro */
+        }
+        form {
+            text-align: center;
+            background-color: white; /* Fundo branco do formulário */
+            padding: 20px;
+            border-radius: 8px;
+        }
+        input[type="text"] {
+            padding: 10px;
+        }
+        button {
+            background-color: #00BFFF; /* Azul-ciano */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <p id="erro"></p>
+        <input type="text" placeholder="Número do Cartão" readonly id="cartao">
+        <br><br>
+        <form method="post" id="form">
+            <button type="submit">Gerar Cartão</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('form').addEventListener('submit', gerarCartao)
+        let gerou = false;
+        
+        function gerarCartao(event) {
+            
+            
+            let url = `http://localhost:3000/card`
+            const erro = document.getElementById('erro')
+            const cartao = document.getElementById('cartao')
+
+            if(!gerou) {
+                axios.post(url)
+                .then(response => {
+                    cartao.value = response.data.descricao
+                    erro.innerHTML = ""
+                    console.log('certo', response.data)
+                    gerou = true
+                    
+                })
+                .catch(error  =>  {
+                    if (error.response) {
+                        console.log('erro',error.response.data)
+                        cartao.value = ""
+                        erro.innerHTML = ""
+                        erro.innerText += error.response.data.codigo
+                        erro.innerText += error.response.data.mensagem
+                        erro.innerText += error.response.data.descricao
+                        
+                    }
+                })
+            } else {
+                alert("Voce ja gerou um cartao!")
+            }
+            
+            event.preventDefault()
+        
+        }
+
+    </script>
+</body>
+</html>

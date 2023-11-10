@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barbearia</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="main.js"></script>
+</head>
+
+<body>
+
+    <div class="estrututa_acesso_cliente">
+        <label>Número do cartão:</label>
+        <input type="number" placeholder="" id="id_cartao"/>
+    </div>
+        <a class="botao_gerar_cartao_compraCliente" href="GerarCartao.html">Clique aqui para gerar o cartão</a>
+
+
+    <div class="compra_servicos_cliente">
+        <div class="servico_corte_cabelo">
+            <div class="cabecalho_servico_corte_cabelo">
+                <h1>Corte de Cabelo</h1>
+                <img src="imagens/compra_servicos_cli/corte.jpg">
+            </div>
+            <div class="corpo_servico_corte_cabelo">
+                <button id="diminuir" onclick="oprSubtrair('qtdCabelo')">
+                    <span>-</span>
+                </button>
+                <span id="qtdCabelo">0</span>
+                <button id="aumentar" onclick="oprSomar('qtdCabelo')">
+                    <span>+</span>
+                </button>
+            </div>       
+        </div>
+
+        <div class="servico_barba">
+            <div class="cabecalho_servico_barba">
+                <h1>Barba</h1>
+                <img src="imagens/compra_servicos_cli/barba.jpg">
+            </div>
+            <div class="corpo_servico_barba">
+                <button id="diminuir" onclick="oprSubtrair('qtdBarba')">
+                    <span>-</span>
+                </button>
+                <span id="qtdBarba">0</span>
+                <button id="aumentar" onclick="oprSomar('qtdBarba')">
+                    <span>+</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="servico_sobrancelha">
+            <div class="cabecalho_servico_sobrancelha">
+                <h1>Sobrancelha</h1>
+                <img src="imagens/compra_servicos_cli/sobrancelha.jfif">
+            </div>
+            <div class="corpo_servico_sobrancelha">
+                <button id="diminuir" onclick="oprSubtrair('qtdSobrancelha')">
+                    <span>-</span>
+                </button>
+                <span id="qtdSobrancelha">0</span>
+                <button id="aumentar" onclick="oprSomar('qtdSobrancelha')">
+                    <span>+</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="servico_pigmentacao">
+            <div class="cabecalho_servico_pigmentacao">
+                <h1>Pigmentação</h1>
+                <img src="imagens/compra_servicos_cli/pigmentacao.jfif">
+            </div>
+            <div class="corpo_servico_pigmentacao">
+                <button id="diminuir" onclick="oprSubtrair('qtdPintura')">
+                    <span>-</span>
+                </button>
+                <span id="qtdPintura">0</span>
+                <button id="aumentar" onclick="oprSomar('qtdPintura')">
+                    <span>+</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="servico_hidratacao">
+            <div class="cabecalho_servico_hidratacao">
+                <h1>Hidratação</h1>
+                <img src="imagens/compra_servicos_cli/hidratacao.jpg">
+            </div>
+            <div class="corpo_servico_hidratacao">
+                <button id="diminuir" onclick="oprSubtrair('qtdHidratacao')">
+                    <span>-</span>
+                </button>
+                <span id="qtdHidratacao">0</span>
+                <button id="aumentar" onclick="oprSomar('qtdHidratacao')">
+                    <span>+</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="servico_corte_infantil">
+            <div class="cabecalho_servico_corte_infantil">
+                <h1>Corte Infantil</h1>
+                <img src="imagens/compra_servicos_cli/corteinfantil.jpg">
+            </div>
+            <div class="corpo_servico_corte_infantil">
+                <button id="diminuir" onclick="oprSubtrair('qtdInfantil')">
+                    <span>-</span>
+                </button>
+                <span id="qtdInfantil">0</span>
+                <button id="aumentar" onclick="oprSomar('qtdInfantil')">
+                    <span>+</span>
+                </button>
+            </div>
+        </div>
+
+        <form method="post" id="form">
+            <button class="botao_compra_servico">Finalizar Compra</button>
+        </form>
+
+    </div>
+
+    <script>
+
+        document.getElementById('form').addEventListener('submit', FinalizarCompra)
+        let gerou = false;
+        
+        function FinalizarCompra(event) 
+        {
+            event.preventDefault()
+            const cartao = document.getElementById('id_cartao');
+            
+            if(!cartao.value)
+            {
+                alert('O número do cartão deve ser preenchido');
+                console.log('erro');
+            }
+
+            let url = `http://localhost:3000/services`
+            
+            const qtdCabelo = Number(document.getElementById('qtdCabelo').innerText)
+            const qtdBarba = Number(document.getElementById('qtdBarba').innerText)
+            const qtdSobrancelha = Number(document.getElementById('qtdSobrancelha').innerText)
+            const qtdPintura = Number(document.getElementById('qtdPintura').innerText)
+            const qtdHidratacao = Number(document.getElementById('qtdHidratacao').innerText)
+            const qtdInfantil = Number(document.getElementById('qtdInfantil').innerText)
+            
+            const data = {numeroCartao:Number(cartao.value)
+                        ,qtdCabelo
+                        ,qtdBarba
+                        ,qtdSobrancelha
+                        ,qtdPintura
+                        ,qtdHidratacao
+                        ,qtdInfantil}
+
+            axios.post(url, data)
+                .then(response => {
+                    alert('sucesso')
+                    console.log('certo', response.data)
+                })
+                .catch(error  =>  {
+                    if (error.response) {
+                        console.log('erro',error.response.data)
+                        alert(error.response.data.mensagem)                        
+                    }
+                })
+        }
+
+    </script>
+
+</body>
+
+</html>
