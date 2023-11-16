@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Funcionário</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="menu_funcionario.js"></script>
+</head>
+<body>
+
+    <div class="compra_servicos_cliente">
+        <div class="servico_corte_cabelo">
+            <div class="cabecalho_servico_corte_cabelo">
+                <h1>Corte de Cabelo</h1>
+                <img src="imagens/compra_servicos_cli/corte.jpg">
+            </div>
+            <div class="corpo_servico_corte_cabelo">
+                <button id="diminuir" onclick="oprSubtrair('qtdCabelo')">
+                    <span>-</span>
+                </button>
+                <span id="qtdCabelo">0</span>
+                <button id="aumentar" onclick="oprSomar('qtdCabelo')">
+                    <span>+</span>
+                </button>
+            </div>       
+        </div>
+
+        <div class="servico_barba">
+            <div class="cabecalho_servico_barba">
+                <h1>Barba</h1>
+                <img src="imagens/compra_servicos_cli/barba.jpg">
+            </div>
+            <div class="corpo_servico_barba">
+                <button id="diminuir" onclick="oprSubtrair('qtdBarba')">
+                    <span>-</span>
+                </button>
+                <span id="qtdBarba">1</span>
+                <button id="aumentar" onclick="oprSomar('qtdBarba')">
+                    <span>+</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="servico_sobrancelha">
+            <div class="cabecalho_servico_sobrancelha">
+                <h1>Sobrancelha</h1>
+                <img src="imagens/compra_servicos_cli/sobrancelha.jfif">
+            </div>
+            <div class="corpo_servico_sobrancelha">
+                <button id="diminuir" onclick="oprSubtrair('qtdSobrancelha')">
+                    <span>-</span>
+                </button>
+                <span id="qtdSobrancelha">0</span>
+                <button id="aumentar" onclick="oprSomar('qtdSobrancelha')">
+                    <span>+</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="servico_pigmentacao">
+            <div class="cabecalho_servico_pigmentacao">
+                <h1>Pigmentação</h1>
+                <img src="imagens/compra_servicos_cli/pigmentacao.jfif">
+            </div>
+            <div class="corpo_servico_pigmentacao">
+                <button id="diminuir" onclick="oprSubtrair('qtdPintura')">
+                    <span>-</span>
+                </button>
+                <span id="qtdPintura">0</span>
+                <button id="aumentar" onclick="oprSomar('qtdPintura')">
+                    <span>+</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="servico_hidratacao">
+            <div class="cabecalho_servico_hidratacao">
+                <h1>Hidratação</h1>
+                <img src="imagens/compra_servicos_cli/hidratacao.jpg">
+            </div>
+            <div class="corpo_servico_hidratacao">
+                <button id="diminuir" onclick="oprSubtrair('qtdHidratacao')">
+                    <span>-</span>
+                </button>
+                <span id="qtdHidratacao">0</span>
+                <button id="aumentar" onclick="oprSomar('qtdHidratacao')">
+                    <span>+</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="servico_corte_infantil">
+            <div class="cabecalho_servico_corte_infantil">
+                <h1>Corte Infantil</h1>
+                <img src="imagens/compra_servicos_cli/corteinfantil.jpg">
+            </div>
+            <div class="corpo_servico_corte_infantil">
+                <button id="diminuir" onclick="oprSubtrair('qtdInfantil')">
+                    <span>-</span>
+                </button>
+                <span id="qtdInfantil">0</span>
+                <button id="aumentar" onclick="oprSomar('qtdInfantil')">
+                    <span>+</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="tabela_servicos_comprados">
+            <table border="1">
+                <tr>
+                    <td>Corte</td>
+                    <td>01</td>
+                </tr>
+                <tr>
+                    <td>Barba</td>
+                    <td>01</td>
+                </tr>
+                <tr>
+                    <td>Sobrancelha</td>
+                    <td>01</td>
+                </tr>
+                <tr>
+                    <td>Pigmentação</td>
+                    <td>01</td>
+                </tr>
+                <tr>
+                    <td>Hidratação</td>
+                    <td>01</td>
+                </tr>
+                <tr>
+                    <td>Corte Infantil</td>
+                    <td>01</td>
+                </tr>
+
+            </table>
+
+        </div>
+
+        <form method="post" id="form">
+            <button class="botao_compra_servico">Remover selecionados</button>  <!--Deve redireionar para a tela menu_funcionario-->
+        </form>
+
+
+</body>
+</html>
